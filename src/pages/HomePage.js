@@ -63,7 +63,7 @@ const HomePage = () => {
             <p className="font-bold">Video is monitored. Keep it clean !</p>
           </div>
 
-          {/* Final Interests & Buttons Layout */}
+          {/* Final Layout for Input and Centered Buttons */}
           <div className="text-center mb-8">
             <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-6">
 
@@ -79,9 +79,9 @@ const HomePage = () => {
                 />
               </div>
 
-              {/* Right: Start Chatting Buttons with Label on Top */}
-              <div className="flex flex-col items-end w-full sm:w-1/2 pl-4">
-                <label className="text-base font-semibold mb-2">Start chatting:</label>
+              {/* Right: Buttons with Centered Label Above */}
+              <div className="flex flex-col items-center w-full sm:w-1/2 pl-4">
+                <label className="text-base font-semibold mb-2 text-center">Start chatting:</label>
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => handleStartChat("text")}
