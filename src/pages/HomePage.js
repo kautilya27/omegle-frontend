@@ -64,31 +64,42 @@ const HomePage = () => {
           </div>
 
           <div className="text-center mb-8">
-            <h2 className="text-xl font-bold mb-4">What do you wanna talk about?</h2>
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
-              <input
-                type="text"
-                placeholder="Add your interests (optional)"
-                value={interests}
-                onChange={(e) => setInterests(e.target.value)}
-                className="p-3 rounded border border-gray-300 w-full"
-              />
-            </div>
-            <h2 className="text-xl font-bold mb-4">Start chatting:</h2>
-            <div className="flex justify-center gap-4">
-              <button
-                onClick={() => handleStartChat("text")}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded"
-              >
-                Text
-              </button>
-              <span className="self-center">or</span>
-              <button
-                onClick={() => handleStartChat("video")}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded"
-              >
-                Video
-              </button>
+            <div className="flex flex-col sm:flex-row justify-center items-start sm:items-end gap-6">
+              {/* Interests Column */}
+              <div className="flex flex-col items-start sm:items-center">
+                <label className="text-base font-semibold mb-2 sm:text-center">
+                  What do you wanna talk about?
+                </label>
+                <input
+                  type="text"
+                  placeholder="Add your interests (optional)"
+                  value={interests}
+                  onChange={(e) => setInterests(e.target.value)}
+                  className="p-2 w-64 border border-gray-300 rounded"
+                />
+              </div>
+
+              {/* Buttons Column */}
+              <div className="flex flex-col items-start sm:items-center">
+                <label className="text-base font-semibold mb-2 sm:text-center">
+                  Start chatting:
+                </label>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handleStartChat("text")}
+                    className="bg-gradient-to-b from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-2 px-6 rounded"
+                  >
+                    Text
+                  </button>
+                  <span className="text-sm text-gray-600 font-semibold">or</span>
+                  <button
+                    onClick={() => handleStartChat("video")}
+                    className="bg-gradient-to-b from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-2 px-6 rounded"
+                  >
+                    Video
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
