@@ -87,14 +87,14 @@ const HomePage = () => {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleStartChat("text")}
-                    className="bg-gradient-to-b from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-2 px-6 rounded"
+                    className="bg-gradient-to-b from-[#4facfe] to-[#00f2fe] text-white font-bold py-2 px-6 rounded-lg border border-blue-300 shadow-inner hover:from-[#3ea8fe] hover:to-[#00d6e5]"
                   >
                     Text
                   </button>
                   <span className="text-sm text-gray-600 font-semibold">or</span>
                   <button
                     onClick={() => handleStartChat("video")}
-                    className="bg-gradient-to-b from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white font-bold py-2 px-6 rounded"
+                    className="bg-gradient-to-b from-[#4facfe] to-[#00f2fe] text-white font-bold py-2 px-6 rounded-lg border border-blue-300 shadow-inner hover:from-[#3ea8fe] hover:to-[#00d6e5]"
                   >
                     Video
                   </button>
