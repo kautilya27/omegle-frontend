@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+function getRandomInRange(prev) {
+  // Generate a random delta between -50 and 50, excluding 0
+  let delta = Math.floor(Math.random() * 101) - 50;
+  if (delta === 0) delta = 1;
+  let next = prev + delta;
+  // Clamp the value between 8000 and 12000
+  if (next < 8000) next = 8000;
+  if (next > 12000) next = 12000;
+  return next;
+}
 
 function Header() {
+  const [onlineNow, setOnlineNow] = useState(
+    Math.floor(Math.random() * (12000 - 8000 + 1)) + 8000
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOnlineNow(prev => getRandomInRange(prev));
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <header
       style={{
@@ -77,7 +100,7 @@ function Header() {
             marginRight: 5,
           }}
         >
-          10,000+
+          {onlineNow.toLocaleString()}
         </span>
         <span
           style={{
