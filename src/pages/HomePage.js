@@ -38,9 +38,9 @@ const HomePage = () => {
 
       <main className="container mx-auto p-4 max-w-4xl">
         <div className="bg-white rounded-lg p-8 shadow-md">
-          <h1 className="text-base font-medium text-gray-500 text-center mb-6 overflow-hidden text-ellipsis whitespace-nowrap sm:text-lg">
+          <p className="text-sm font-medium text-gray-500 text-center mb-6 overflow-hidden text-ellipsis whitespace-nowrap">
             You don't need an app to use Omegle Online on your phone or tablet! The website works great on mobile.
-          </h1>
+          </p>
 
           <div style={{ textAlign: "center", marginBottom: 20 }}>
             <img
