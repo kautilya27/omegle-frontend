@@ -1,15 +1,34 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import TermsPopup from "./TermsPopup"
 
+const getNextOnlineUsers = (prev) => {
+  let delta = Math.floor(Math.random() * 101) - 50 // -50 to +50
+  if (delta === 0) delta = 1
+  let next = prev + delta
+  if (next < 8000) next = 8000
+  if (next > 13000) next = 13000
+  return next
+}
+
 const HomePage = () => {
   const navigate = useNavigate()
-  const [onlineUsers] = useState(Math.floor(Math.random() * 5000) + 8000)
+  const [onlineUsers, setOnlineUsers] = useState(
+    Math.floor(Math.random() * 5000) + 8000
+  )
   const [showTermsPopup, setShowTermsPopup] = useState(false)
   const [pendingChatType, setPendingChatType] = useState(null)
   const [interests, setInterests] = useState("")
+
+  // Update onlineUsers every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOnlineUsers(prev => getNextOnlineUsers(prev))
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
 
   // When user clicks Text or Video, show popup
   const handleStartChat = (type) => {
@@ -35,12 +54,22 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-[#f9f9f7]">
       <header className="container mx-auto p-4 flex justify-between items-center">
-        <div className="flex items-center"></div>
+        <div className="flex items-center">
+          {/* You can add your logo or other header content here */}
+        </div>
+        <div className="flex items-center">
+          <span className="text-blue-500 font-bold text-lg mr-2">
+            {onlineUsers.toLocaleString()}
+          </span>
+          <span className="text-blue-500 font-medium text-base">
+            online now
+          </span>
+        </div>
       </header>
 
       <main className="container mx-auto p-4 max-w-3xl">
         <div className="bg-white rounded-lg p-8 shadow-md">
-          <h1 className="text-xl font-bold text-center mb-6">
+          <h1 className="text-base font-medium text-gray-500 text-center mb-6 whitespace-nowrap">
             You don't need an app to use Omegle Online on your phone or tablet! The website works great on mobile.
           </h1>
           <div style={{ textAlign: "center", marginBottom: 20 }}>
