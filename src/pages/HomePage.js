@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import TermsPopup from "./TermsPopup"
 
@@ -38,12 +38,7 @@ const HomePage = () => {
           {/* You can add your logo or other header content here */}
         </div>
         <div className="flex items-center">
-          <span className="text-blue-500 font-bold text-lg mr-2">
-            {/* Remove or replace this if onlineUsers is no longer used */}
-          </span>
-          <span className="text-blue-500 font-medium text-base">
-            online now
-          </span>
+          {/* Online user count removed */}
         </div>
       </header>
 
