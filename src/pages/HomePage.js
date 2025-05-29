@@ -63,11 +63,12 @@ const HomePage = () => {
             <p className="font-bold">Video is monitored. Keep it clean !</p>
           </div>
 
+          {/* Interests and Buttons */}
           <div className="text-center mb-8">
-            <div className="flex flex-col sm:flex-row justify-center items-start sm:items-end gap-6">
+            <div className="flex flex-col sm:flex-row justify-center items-start sm:items-end gap-12">
               {/* Interests Column */}
-              <div className="flex flex-col items-start sm:items-center">
-                <label className="text-base font-semibold mb-2 sm:text-center">
+              <div className="flex flex-col items-start sm:items-end sm:mr-4">
+                <label className="text-base font-semibold mb-2 sm:text-right">
                   What do you wanna talk about?
                 </label>
                 <input
@@ -80,11 +81,11 @@ const HomePage = () => {
               </div>
 
               {/* Buttons Column */}
-              <div className="flex flex-col items-start sm:items-center">
-                <label className="text-base font-semibold mb-2 sm:text-center">
+              <div className="flex flex-col items-start sm:items-start sm:ml-4">
+                <label className="text-base font-semibold mb-2">
                   Start chatting:
                 </label>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <button
                     onClick={() => handleStartChat("text")}
                     className="bg-gradient-to-b from-[#4facfe] to-[#00f2fe] text-white font-bold py-2 px-6 rounded-lg border border-blue-300 shadow-inner hover:from-[#3ea8fe] hover:to-[#00d6e5]"
