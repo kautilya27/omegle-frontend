@@ -63,28 +63,25 @@ const HomePage = () => {
             <p className="font-bold">Video is monitored. Keep it clean !</p>
           </div>
 
-          {/* Interests and Buttons */}
+          {/* Updated Layout for Interests + Buttons */}
           <div className="text-center mb-8">
-            <div className="flex flex-col sm:flex-row justify-center items-start sm:items-end gap-12">
-              {/* Interests Column */}
-              <div className="flex flex-col items-start sm:items-end sm:mr-4">
-                <label className="text-base font-semibold mb-2 sm:text-right">
-                  What do you wanna talk about?
-                </label>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start w-full">
+              
+              {/* Left: Interest Input */}
+              <div className="flex flex-col items-start w-full sm:w-1/2 pr-4">
+                <label className="text-base font-semibold mb-2">What do you wanna talk about?</label>
                 <input
                   type="text"
                   placeholder="Add your interests (optional)"
                   value={interests}
                   onChange={(e) => setInterests(e.target.value)}
-                  className="p-2 w-64 border border-gray-300 rounded"
+                  className="p-2 w-full border border-gray-300 rounded"
                 />
               </div>
 
-              {/* Buttons Column */}
-              <div className="flex flex-col items-start sm:items-start sm:ml-4">
-                <label className="text-base font-semibold mb-2">
-                  Start chatting:
-                </label>
+              {/* Right: Chat Buttons */}
+              <div className="flex flex-col items-end w-full sm:w-1/2 pl-4 mt-6 sm:mt-0">
+                <label className="text-base font-semibold mb-2">Start chatting:</label>
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => handleStartChat("text")}
@@ -101,6 +98,7 @@ const HomePage = () => {
                   </button>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
