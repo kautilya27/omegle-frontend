@@ -22,6 +22,7 @@ const HomePage = () => {
   const [pendingChatType, setPendingChatType] = useState(null)
   const [interests, setInterests] = useState("")
 
+  // Update onlineUsers every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setOnlineUsers(prev => getNextOnlineUsers(prev))
@@ -29,11 +30,13 @@ const HomePage = () => {
     return () => clearInterval(interval)
   }, [])
 
+  // When user clicks Text or Video, show popup
   const handleStartChat = (type) => {
     setPendingChatType(type)
     setShowTermsPopup(true)
   }
 
+  // When user accepts terms in popup
   const handleAcceptTerms = () => {
     setShowTermsPopup(false)
     if (pendingChatType) {
@@ -42,6 +45,7 @@ const HomePage = () => {
     }
   }
 
+  // When user cancels popup
   const handleCancelTerms = () => {
     setShowTermsPopup(false)
     setPendingChatType(null)
@@ -50,7 +54,9 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-[#f9f9f7]">
       <header className="container mx-auto p-4 flex justify-between items-center">
-        <div className="flex items-center"></div>
+        <div className="flex items-center">
+          {/* You can add your logo or other header content here */}
+        </div>
         <div className="flex items-center">
           <span className="text-blue-500 font-bold text-lg mr-2">
             {onlineUsers.toLocaleString()}
@@ -63,8 +69,7 @@ const HomePage = () => {
 
       <main className="container mx-auto p-4 max-w-3xl">
         <div className="bg-white rounded-lg p-8 shadow-md">
-          {/* Use Option 1 here */}
-          <h1 className="text-sm font-medium text-gray-500 text-center mb-6">
+          <h1 className="text-base font-medium text-gray-500 text-center mb-6 whitespace-nowrap">
             You don't need an app to use Omegle Online on your phone or tablet! The website works great on mobile.
           </h1>
           <div style={{ textAlign: "center", marginBottom: 20 }}>
