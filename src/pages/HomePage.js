@@ -10,13 +10,11 @@ const HomePage = () => {
   const [pendingChatType, setPendingChatType] = useState(null)
   const [interests, setInterests] = useState("")
 
-  // When user clicks Text or Video, show popup
   const handleStartChat = (type) => {
     setPendingChatType(type)
     setShowTermsPopup(true)
   }
 
-  // When user accepts terms in popup
   const handleAcceptTerms = () => {
     setShowTermsPopup(false)
     if (pendingChatType) {
@@ -25,7 +23,6 @@ const HomePage = () => {
     }
   }
 
-  // When user cancels popup
   const handleCancelTerms = () => {
     setShowTermsPopup(false)
     setPendingChatType(null)
@@ -35,18 +32,16 @@ const HomePage = () => {
     <div className="min-h-screen bg-[#f9f9f7]">
       <header className="container mx-auto p-4 flex justify-between items-center">
         <div className="flex items-center">
-          {/* You can add your logo or other header content here */}
-        </div>
-        <div className="flex items-center">
-          {/* Online user count removed */}
+          {/* Add logo or header content if needed */}
         </div>
       </header>
 
-      <main className="container mx-auto p-4 max-w-3xl">
+      <main className="container mx-auto p-4 max-w-4xl">
         <div className="bg-white rounded-lg p-8 shadow-md">
-          <h1 className="text-base font-medium text-gray-500 text-center mb-6 whitespace-nowrap">
+          <h1 className="text-base font-medium text-gray-500 text-center mb-6 overflow-hidden text-ellipsis whitespace-nowrap sm:text-lg">
             You don't need an app to use Omegle Online on your phone or tablet! The website works great on mobile.
           </h1>
+
           <div style={{ textAlign: "center", marginBottom: 20 }}>
             <img
               src="/people%20video%20calling.webp"
@@ -54,6 +49,7 @@ const HomePage = () => {
               style={{ maxWidth: "100%", height: "200px", borderRadius: 8, marginLeft: "25%" }}
             />
           </div>
+
           <div className="mb-8">
             <p className="mb-4">
               Omegle (oh-meg-ull) Online is a great way to meet new friends. When you use Omegle Online, we pick someone
@@ -62,6 +58,7 @@ const HomePage = () => {
               use Omegle Online, so please be careful.
             </p>
           </div>
+
           <div className="p-4 mb-8 text-center rounded bg-blue-100">
             <p className="font-bold">Video is monitored. Keep it clean !</p>
           </div>
@@ -97,7 +94,6 @@ const HomePage = () => {
         </div>
       </main>
 
-      {/* Terms Popup */}
       {showTermsPopup && (
         <TermsPopup
           onAccept={handleAcceptTerms}
