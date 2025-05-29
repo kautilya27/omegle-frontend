@@ -4,31 +4,11 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import TermsPopup from "./TermsPopup"
 
-const getNextOnlineUsers = (prev) => {
-  let delta = Math.floor(Math.random() * 101) - 50 // -50 to +50
-  if (delta === 0) delta = 1
-  let next = prev + delta
-  if (next < 8000) next = 8000
-  if (next > 13000) next = 13000
-  return next
-}
-
 const HomePage = () => {
   const navigate = useNavigate()
-  const [onlineUsers, setOnlineUsers] = useState(
-    Math.floor(Math.random() * 5000) + 8000
-  )
   const [showTermsPopup, setShowTermsPopup] = useState(false)
   const [pendingChatType, setPendingChatType] = useState(null)
   const [interests, setInterests] = useState("")
-
-  // Update onlineUsers every 5 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setOnlineUsers(prev => getNextOnlineUsers(prev))
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
 
   // When user clicks Text or Video, show popup
   const handleStartChat = (type) => {
@@ -59,7 +39,7 @@ const HomePage = () => {
         </div>
         <div className="flex items-center">
           <span className="text-blue-500 font-bold text-lg mr-2">
-            {onlineUsers.toLocaleString()}
+            {/* Remove or replace this if onlineUsers is no longer used */}
           </span>
           <span className="text-blue-500 font-medium text-base">
             online now
@@ -90,7 +70,7 @@ const HomePage = () => {
           <div className="p-4 mb-8 text-center rounded bg-blue-100">
             <p className="font-bold">Video is monitored. Keep it clean !</p>
           </div>
-         
+
           <div className="text-center mb-8">
             <h2 className="text-xl font-bold mb-4">What do you wanna talk about?</h2>
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
