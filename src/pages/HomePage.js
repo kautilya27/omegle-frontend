@@ -36,35 +36,32 @@ const HomePage = () => {
         </div>
       </header>
 
-      <main className="container mx-auto p-4 max-w-4xl">
-        <div className="bg-white rounded-lg p-8 shadow-md">
-          <p className="text-sm font-medium text-gray-500 text-center mb-6 overflow-hidden text-ellipsis whitespace-nowrap">
+      {/* Vertically centered main section */}
+      <main className="flex items-center justify-center min-h-[calc(100vh-64px)] px-4">
+        <div className="bg-white rounded-lg p-8 shadow-md w-full max-w-4xl">
+          
+          <p className="text-sm font-medium text-gray-500 text-center mb-4 overflow-hidden text-ellipsis whitespace-nowrap">
             You don't need an app to use Omegle Online on your phone or tablet! The website works great on mobile.
           </p>
 
-          <div style={{ textAlign: "center", marginBottom: 20 }}>
+          <div className="text-center mb-4">
             <img
               src="/people%20video%20calling.webp"
               alt="People Video Calling"
-              style={{ maxWidth: "100%", height: "200px", borderRadius: 8, marginLeft: "25%" }}
+              className="mx-auto h-[180px] max-w-full rounded"
             />
           </div>
 
-          <div className="mb-8">
-            <p className="mb-4">
-              Omegle (oh-meg-ull) Online is a great way to meet new friends. When you use Omegle Online, we pick someone
-              else at random and let you talk one-on-one. To help you stay safe, chats are anonymous unless you tell
-              someone who you are (not suggested!), and you can stop a chat at any time. Predators have been known to
-              use Omegle Online, so please be careful.
-            </p>
-          </div>
+          <p className="mb-4 text-sm text-gray-700">
+            Omegle (oh-meg-ull) Online is a great way to meet new friends. When you use Omegle Online, we pick someone else at random and let you talk one-on-one. To help you stay safe, chats are anonymous unless you tell someone who you are (not suggested!), and you can stop a chat at any time. Predators have been known to use Omegle Online, so please be careful.
+          </p>
 
-          <div className="p-4 mb-8 text-center rounded bg-blue-100">
+          <div className="p-4 mb-6 text-center rounded bg-blue-100">
             <p className="font-bold">Video is monitored. Keep it clean !</p>
           </div>
 
-          {/* Final Layout for Input and Centered Buttons */}
-          <div className="text-center mb-8">
+          {/* Input and Buttons */}
+          <div className="text-center">
             <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-6">
 
               {/* Left: Interest Input */}
@@ -79,7 +76,7 @@ const HomePage = () => {
                 />
               </div>
 
-              {/* Right: Buttons with Centered Label Above */}
+              {/* Right: Centered Label and Buttons */}
               <div className="flex flex-col items-center w-full sm:w-1/2 pl-4">
                 <label className="text-base font-semibold mb-2 text-center">Start chatting:</label>
                 <div className="flex items-center gap-3">
