@@ -63,12 +63,12 @@ const HomePage = () => {
             <p className="font-bold">Video is monitored. Keep it clean !</p>
           </div>
 
-          {/* Updated Layout for Interests + Buttons */}
+          {/* Updated Interests & Buttons Section */}
           <div className="text-center mb-8">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-start w-full">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full">
               
               {/* Left: Interest Input */}
-              <div className="flex flex-col items-start w-full sm:w-1/2 pr-4">
+              <div className="flex flex-col items-start w-full sm:w-1/2 pr-4 mb-4 sm:mb-0">
                 <label className="text-base font-semibold mb-2">What do you wanna talk about?</label>
                 <input
                   type="text"
@@ -79,9 +79,9 @@ const HomePage = () => {
                 />
               </div>
 
-              {/* Right: Chat Buttons */}
-              <div className="flex flex-col items-end w-full sm:w-1/2 pl-4 mt-6 sm:mt-0">
-                <label className="text-base font-semibold mb-2">Start chatting:</label>
+              {/* Right: Label and Buttons Inline */}
+              <div className="flex items-center justify-end w-full sm:w-1/2 pl-4">
+                <span className="text-base font-semibold mr-3 whitespace-nowrap">Start chatting:</span>
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => handleStartChat("text")}
