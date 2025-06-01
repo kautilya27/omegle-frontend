@@ -124,7 +124,7 @@ const ChatPage = () => {
         connectionTimeoutRef.current = null
       }
 
-      setStatus("connected")
+      setStatus("Connected")
       setConnected(true)
       setReconnecting(false)
       setCountry(data.country || "somewhere")
@@ -664,8 +664,7 @@ const ChatPage = () => {
               <div className="hidden lg:block p-4 border-b-2 border-gray-100 flex-shrink-0 bg-gray-50 rounded-t-xl">
                 {connected && hasRemoteVideo ? (
                   <p className="text-lg font-medium text-gray-800">
-                    {/* Great match! Connecting with someone from {country}. Get ready for an exciting chat! */}
-                    You're now chatting with a random stranger. Stand with the fight against world hunger.
+                    Great match! Connecting with someone from {country}. Get ready for an exciting chat!
                     <span className="ml-2">🌎 💬</span>
                   </p>
                 ) : (
