@@ -129,6 +129,12 @@ const ChatPage = () => {
       setReconnecting(false)
       setCountry(data.country || "somewhere")
 
+      // If we already have a remote stream, make sure to show it
+      if (remoteStreamRef.current && remoteVideoRef.current) {
+        remoteVideoRef.current.srcObject = remoteStreamRef.current
+        setHasRemoteVideo(true)
+      }
+
       if (data.initiator) {
         console.log("We are the initiator, starting call")
         startCall()
@@ -316,7 +322,15 @@ const ChatPage = () => {
 
     if (remoteVideoRef.current) {
       remoteVideoRef.current.srcObject = stream
+
+      // Make sure to set hasRemoteVideo to true to show the video
       setHasRemoteVideo(true)
+
+      // Add event listeners to ensure video plays
+      remoteVideoRef.current.onloadedmetadata = () => {
+        console.log("Remote video metadata loaded")
+        remoteVideoRef.current.play().catch((err) => console.error("Error playing remote video:", err))
+      }
     }
   }
 
@@ -471,6 +485,15 @@ const ChatPage = () => {
     playLocalVideo()
   }
 
+  // Monitor remote video and stream
+  useEffect(() => {
+    if (remoteVideoRef.current && remoteStreamRef.current && connected) {
+      console.log("Setting up remote video with existing stream")
+      remoteVideoRef.current.srcObject = remoteStreamRef.current
+      setHasRemoteVideo(true)
+    }
+  }, [connected, remoteVideoRef.current, remoteStreamRef.current])
+
   return (
     <div className="h-screen w-screen flex flex-col bg-white overflow-hidden">
       {/* Custom CSS for animations */}
@@ -529,7 +552,7 @@ const ChatPage = () => {
           <div className="relative flex-1 lg:w-2/5 lg:p-3 overflow-hidden">
             {/* Remote video container */}
             <div className="relative h-full min-h-[280px] lg:h-1/2 bg-red-50 rounded-t-2xl lg:rounded-2xl overflow-hidden shadow-lg mb-0 lg:mb-4">
-              {connected && hasRemoteVideo ? (
+              {connected || hasRemoteVideo ? (
                 <video ref={remoteVideoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
               ) : (
                 <LoaderComponent />
