@@ -124,7 +124,7 @@ const ChatPage = () => {
         connectionTimeoutRef.current = null
       }
 
-      setStatus("Connected")
+      setStatus("connected")
       setConnected(true)
       setReconnecting(false)
       setCountry(data.country || "somewhere")
@@ -243,7 +243,7 @@ const ChatPage = () => {
           height: { ideal: 240, max: 480 },
           facingMode: "user",
         },
-        audio: true,
+        audio: true, // Enable audio
       }
 
       let stream
@@ -254,7 +254,7 @@ const ChatPage = () => {
         console.log("Failed with constraints, trying basic:", error)
         stream = await navigator.mediaDevices.getUserMedia({
           video: true,
-          audio: false,
+          audio: true,
         })
       }
 
@@ -316,12 +316,33 @@ const ChatPage = () => {
     }
   }
 
+  // Handle user interaction to enable audio
+  const enableAudio = useCallback(async () => {
+    if (remoteVideoRef.current) {
+      try {
+        remoteVideoRef.current.muted = false
+        await remoteVideoRef.current.play()
+        console.log("Audio enabled successfully")
+      } catch (error) {
+        console.log("Audio enable failed:", error)
+      }
+    }
+  }, [])
+
+  // Add click handler to enable audio on user interaction
+  const handleRemoteVideoClick = () => {
+    enableAudio()
+  }
+
   const handleRemoteStream = (stream) => {
     console.log("Received remote stream")
     remoteStreamRef.current = stream
 
     if (remoteVideoRef.current) {
       remoteVideoRef.current.srcObject = stream
+
+      // Ensure remote video is not muted to hear audio
+      remoteVideoRef.current.muted = false
 
       // Make sure to set hasRemoteVideo to true to show the video
       setHasRemoteVideo(true)
@@ -553,7 +574,13 @@ const ChatPage = () => {
             {/* Remote video container */}
             <div className="relative h-full min-h-[280px] lg:h-1/2 bg-red-50 rounded-t-2xl lg:rounded-2xl overflow-hidden shadow-lg mb-0 lg:mb-4">
               {connected || hasRemoteVideo ? (
-                <video ref={remoteVideoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
+                <video
+                  ref={remoteVideoRef}
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-cover"
+                  onClick={handleRemoteVideoClick}
+                />
               ) : (
                 <LoaderComponent />
               )}
@@ -637,7 +664,8 @@ const ChatPage = () => {
               <div className="hidden lg:block p-4 border-b-2 border-gray-100 flex-shrink-0 bg-gray-50 rounded-t-xl">
                 {connected && hasRemoteVideo ? (
                   <p className="text-lg font-medium text-gray-800">
-                    Great match! Connecting with someone from {country}. Get ready for an exciting chat!
+                    {/* Great match! Connecting with someone from {country}. Get ready for an exciting chat! */}
+                    You're now chatting with a random stranger. Stand with the fight against world hunger.
                     <span className="ml-2">🌎 💬</span>
                   </p>
                 ) : (
