@@ -490,7 +490,6 @@ const ChatPage = () => {
       </div>
       <div className="text-center px-4">
         <p className="text-white text-lg font-medium mb-2">{status}</p>
-        {/* <p className="text-gray-300 text-sm">Please wait while we connect you...</p> */}
       </div>
       <div className="flex space-x-1 mt-4">
         <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
@@ -516,7 +515,7 @@ const ChatPage = () => {
   }, [connected, remoteVideoRef.current, remoteStreamRef.current])
 
   return (
-    <div className="h-screen w-screen flex flex-col bg-white overflow-hidden">
+    <div className="h-screen w-screen flex flex-col bg-white lg:overflow-hidden">
       {/* Custom CSS for animations */}
       <style jsx>{`
         .animation-delay-150 {
@@ -563,16 +562,15 @@ const ChatPage = () => {
         {reconnecting && (
           <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-2 text-sm flex-shrink-0">
             <p className="font-bold">Reconnecting...</p>
-            {/* <p>Looking for a new partner. Please wait.</p> */}
           </div>
         )}
 
         {/* Video container - Responsive layout */}
         <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
-          {/* Video section - Contains both remote and local videos */}
-          <div className="relative flex-1 lg:w-2/5 lg:p-3 overflow-hidden">
-            {/* Remote video container */}
-            <div className="relative h-full min-h-[280px] lg:h-1/2 bg-red-50 rounded-t-2xl lg:rounded-2xl overflow-hidden shadow-lg mb-0 lg:mb-4">
+          {/* Video section - Contains both remote and local videos - SMALLER ON DESKTOP */}
+          <div className="relative flex-1 lg:w-[30%] overflow-hidden h-1/2 lg:h-auto">
+            {/* Remote video container - REMOVED SHADOW */}
+            <div className="relative h-full min-h-[180px] lg:h-[45%] bg-red-50 overflow-hidden mb-0">
               {connected || hasRemoteVideo ? (
                 <video
                   ref={remoteVideoRef}
@@ -609,9 +607,9 @@ const ChatPage = () => {
               )}
             </div>
 
-            {/* Local video container - Overlay on mobile, separate on desktop */}
+            {/* Local video container - Overlay on mobile, separate on desktop - REMOVED SHADOW */}
             <div
-              className="absolute bottom-4 right-4 w-32 h-44 lg:relative lg:bottom-auto lg:right-auto lg:w-full lg:h-1/2 bg-gray-800 rounded-xl lg:rounded-2xl overflow-hidden shadow-xl z-20 lg:z-auto"
+              className="absolute bottom-4 right-4 w-32 h-44 lg:relative lg:bottom-auto lg:right-auto lg:w-full lg:h-[45%] bg-gray-800 overflow-hidden z-20 lg:z-auto"
               onClick={handleVideoClick}
             >
               <video
@@ -648,7 +646,7 @@ const ChatPage = () => {
                 <div className="absolute inset-0 flex items-center justify-center z-30 lg:hidden">
                   <button
                     onClick={handleVideoClick}
-                    className="bg-green-500 text-white px-3 py-2 lg:px-4 lg:py-3 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold shadow-lg"
+                    className="bg-green-500 text-white px-3 py-2 lg:px-4 lg:py-3 rounded-lg lg:rounded-xl text-xs lg:text-sm font-bold"
                   >
                     ▶ Start Camera
                   </button>
@@ -657,14 +655,15 @@ const ChatPage = () => {
             </div>
           </div>
 
-          {/* Chat section - Right side on desktop, bottom on mobile */}
-          <div className="lg:w-3/5 lg:p-3 flex flex-col overflow-hidden">
-            <div className="bg-white border-t-2 lg:border-2 lg:border-gray-200 lg:rounded-xl flex flex-col h-48 lg:h-full shadow-lg overflow-hidden">
+          {/* Chat section - Right side on desktop, bottom on mobile - EXPANDED WIDTH */}
+          <div className="flex flex-col overflow-hidden lg:w-[70%]">
+            <div className="bg-white border-t-2 lg:border-0 flex flex-col h-64 lg:h-[500px] overflow-hidden">
               {/* Chat header - hidden on mobile */}
-              <div className="hidden lg:block p-4 border-b-2 border-gray-100 flex-shrink-0 bg-gray-50 rounded-t-xl">
+              <div className="hidden lg:block p-4 border-b-2 border-gray-100 flex-shrink-0 bg-gray-50">
                 {connected && hasRemoteVideo ? (
                   <p className="text-lg font-medium text-gray-800">
-                    Great match! Connecting with someone from {country}. Get ready for an exciting chat!
+                    You're now chatting with a random stranger from {country}. Stand with the fight against world
+                    hunger.
                     <span className="ml-2">🌎 💬</span>
                   </p>
                 ) : (
@@ -672,8 +671,8 @@ const ChatPage = () => {
                 )}
               </div>
 
-              {/* Chat messages */}
-              <div className="flex-1 p-3 lg:p-4 mb-4 overflow-y-auto bg-gray-50">
+              {/* Chat messages - ALWAYS VISIBLE */}
+              <div className="flex-1 p-2 lg:p-4 mb-1 lg:mb-2 overflow-y-auto bg-gray-50 block">
                 <div className="min-h-full">
                   {messages.length === 0 && (
                     <div className="h-full flex items-center justify-center text-gray-500 text-sm lg:text-base">
@@ -686,7 +685,7 @@ const ChatPage = () => {
                   {messages.map((msg, index) => (
                     <div key={index} className={`mb-2 lg:mb-3 ${msg.sender === "me" ? "text-right" : "text-left"}`}>
                       <span
-                        className={`inline-block px-3 lg:px-4 py-2 lg:py-2 rounded-xl text-sm lg:text-base shadow-sm ${
+                        className={`inline-block px-3 lg:px-4 py-2 lg:py-2 rounded-xl text-sm lg:text-base ${
                           msg.sender === "me"
                             ? "bg-blue-500 text-white rounded-br-sm"
                             : "bg-white text-gray-800 border border-gray-200 rounded-bl-sm"
@@ -701,15 +700,14 @@ const ChatPage = () => {
               </div>
 
               {/* Spacer between messages and input */}
-              <div className="h-4 bg-white border-t border-gray-200"></div>
 
               {/* Chat input */}
-              <div className="p-3 lg:p-4 bg-white border-t-2 border-gray-200 flex-shrink-0">
+              <div className=" p-2 lg:p-3 bg-white border-t-2 border-gray-200 flex-shrink-0">
                 <div className="flex items-center gap-2">
                   {/* Desktop controls on left */}
                   <button
                     onClick={nextPartner}
-                    className="hidden lg:block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl text-sm flex-shrink-0 shadow-md transition-colors"
+                    className="hidden lg:block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl text-sm flex-shrink-0 transition-colors"
                   >
                     Next
                   </button>
@@ -727,7 +725,7 @@ const ChatPage = () => {
                   <button
                     onClick={sendMessage}
                     disabled={!connected || !hasRemoteVideo || !currentMessage.trim()}
-                    className={`p-3 rounded-xl transition-colors shadow-md ${
+                    className={`p-3 rounded-xl transition-colors ${
                       connected && hasRemoteVideo && currentMessage.trim()
                         ? "bg-blue-500 hover:bg-blue-600 text-white"
                         : "bg-gray-400 text-gray-200"
@@ -745,34 +743,10 @@ const ChatPage = () => {
                   {/* Desktop controls on right */}
                   <button
                     onClick={disconnect}
-                    className="hidden lg:block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-xl text-sm flex-shrink-0 shadow-md transition-colors"
+                    className="hidden lg:block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-xl text-sm flex-shrink-0 transition-colors"
                   >
                     Stop
                   </button>
-                </div>
-              </div>
-
-              {/* Advertisement Section */}
-              <div className="p-3 lg:p-4 border-t-2 border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100 flex-shrink-0">
-                <div className="text-center">
-                  <script
-                    async
-                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6382255537358474"
-                    crossOrigin="anonymous"
-                  ></script>
-                  <ins
-                    className="adsbygoogle"
-                    style={{ display: "inline-block", width: "390px", height: "60px" }}
-                    data-ad-client="ca-pub-6382255537358474"
-                    data-ad-slot="1425864328"
-                  ></ins>
-                  <script
-                    dangerouslySetInnerHTML={{
-                      __html: `
-                      (adsbygoogle = window.adsbygoogle || []).push({});
-                    `,
-                    }}
-                  />
                 </div>
               </div>
 
@@ -781,7 +755,7 @@ const ChatPage = () => {
                 <div className="hidden lg:block p-4 border-t-2 border-gray-200 flex-shrink-0 bg-gray-50">
                   <button
                     onClick={() => setShowReportModal(true)}
-                    className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-xl text-sm shadow-md transition-colors"
+                    className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors"
                   >
                     Report User
                   </button>
@@ -791,23 +765,23 @@ const ChatPage = () => {
           </div>
 
           {/* Mobile controls - Bottom bar */}
-          <div className="lg:hidden p-3 flex justify-center space-x-3 border-t-2 border-gray-200 flex-shrink-0 bg-white shadow-lg">
+          <div className="lg:hidden p-3 flex justify-center space-x-3 border-t-2 border-gray-200 flex-shrink-0 bg-white">
             <button
               onClick={nextPartner}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-md transition-colors"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-xl text-sm transition-colors"
             >
               Next
             </button>
             <button
               onClick={disconnect}
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-md transition-colors"
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-xl text-sm transition-colors"
             >
               Stop
             </button>
             {connected && hasRemoteVideo && (
               <button
                 onClick={() => setShowReportModal(true)}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-md transition-colors"
+                className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded-xl text-sm transition-colors"
               >
                 Report
               </button>
