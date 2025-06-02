@@ -12,6 +12,7 @@ import Footer from "./components/Footer"
 import PrivacyPolicy from "./components/PrivacyPolicy"
 import TermsOfService from "./components/TermsOfService"
 import CommunityGuidelines from "./components/CommunityGuidelines"
+import ScrollToTop from "./components/ScrollToTop"
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
     <>
       <Header/>
       <ThemeProvider>
+      <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/chat" element={<ChatPage />} />
