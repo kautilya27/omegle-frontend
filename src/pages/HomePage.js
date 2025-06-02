@@ -61,21 +61,12 @@ const HomePage = () => {
           </div>
 
           {/* Input and Buttons */}
+          
           <div className="text-center">
-            <div className="flex flex-col sm:flex-row justify-between items-start w-full gap-6">
 
-              {/* Left: Interest Input */}
-              <div className="flex flex-col items-start w-full sm:w-1/2 pr-4">
-                <label className="text-base font-semibold mb-2">What do you wanna talk about?</label>
-                <input
-                  type="text"
-                  placeholder="Add your interests (optional)"
-                  value={interests}
-                  onChange={(e) => setInterests(e.target.value)}
-                  className="p-2 w-full border border-gray-300 rounded"
-                />
-              </div>
+            <div className="flex justify-center items-center h-[20vh]">
 
+              
               {/* Right: Centered Label and Buttons */}
               <div className="flex flex-col items-center w-full sm:w-1/2 pl-4">
                 <label className="text-base font-semibold mb-2 text-center">Start chatting:</label>
@@ -96,6 +87,7 @@ const HomePage = () => {
                 </div>
               </div>
 
+            
             </div>
           </div>
         </div>
