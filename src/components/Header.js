@@ -1,5 +1,5 @@
 "use client"
-
+import { Link } from 'react-router-dom';
 import { useState, useEffect } from "react"
 
 function getRandomInRange(prev) {
@@ -29,11 +29,14 @@ function Header() {
       {/* Logo and Online Text */}
       <div className="flex items-center flex-wrap">
         <div className="flex items-center gap-1">
+          <Link to="/">
+
           <img
             src="https://ext.same-assets.com/2180202029/3907936530.png"
             alt="Omegle Online Logo"
             className="h-8 sm:h-10 md:h-[42px]"
           />
+          </Link>
           <span className="font-semibold text-[8px] sm:text-xs text-[#d2874f] tracking-wider relative top-2 sm:top-3">
             Online
           </span>
