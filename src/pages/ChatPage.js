@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import io from "socket.io-client"
 import ReportModal from "../components/ReportModal"
 import { initializePeerConnection, createOffer, handleAnswer, handleIceCandidate } from "../utils/webrtc"
-
+import AdBanner from "../components/AdBanner"
 const ChatPage = () => {
   const location = useLocation()
   const navigate = useNavigate()
@@ -592,19 +592,7 @@ const ChatPage = () => {
                 <span className="text-orange-400">megle</span>
               </div>
 
-              {/* Show stranger info only when connected and has video */}
-              {connected && hasRemoteVideo && (
-                <div className="absolute bottom-3 right-3 bg-black bg-opacity-60 text-white px-3 py-2 rounded-full z-10">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mr-2">
-                      <span className="text-white font-bold text-sm">S</span>
-                    </div>
-                    <div>
-                      <div className="font-bold text-sm">Stranger</div>
-                    </div>
-                  </div>
-                </div>
-              )}
+              
             </div>
 
             {/* Local video container - Overlay on mobile, separate on desktop - REMOVED SHADOW */}
@@ -621,15 +609,7 @@ const ChatPage = () => {
                 onClick={handleVideoClick}
               />
 
-              {/* "You" label */}
-              <div className="absolute bottom-2 left-2 lg:bottom-3 lg:left-3 bg-black bg-opacity-80 text-white px-2 py-1 lg:px-3 lg:py-2 rounded-lg text-xs lg:text-sm z-10">
-                <div className="flex items-center">
-                  <div className="w-4 h-4 lg:w-8 lg:h-8 bg-green-500 rounded-full flex items-center justify-center mr-1 lg:mr-2">
-                    <span className="text-white font-bold text-xs lg:text-sm">Y</span>
-                  </div>
-                  <span className="font-bold">You</span>
-                </div>
-              </div>
+              
 
               {/* Loading indicator */}
               {!localVideoReady && (
@@ -657,7 +637,7 @@ const ChatPage = () => {
 
           {/* Chat section - Right side on desktop, bottom on mobile - EXPANDED WIDTH */}
           <div className="flex flex-col overflow-hidden lg:w-[70%]">
-            <div className="bg-white border-t-2 lg:border-0 flex flex-col h-64 lg:h-[500px] overflow-hidden">
+            <div className="bg-white border-t-2 lg:border-0 flex flex-col h-64 lg:h-[600px] overflow-hidden">
               {/* Chat header - hidden on mobile */}
               <div className="hidden lg:block p-4 border-b-2 border-gray-100 flex-shrink-0 bg-gray-50">
                 {connected && hasRemoteVideo ? (
@@ -683,16 +663,25 @@ const ChatPage = () => {
                   )}
 
                   {messages.map((msg, index) => (
-                    <div key={index} className={`mb-2 lg:mb-3 ${msg.sender === "me" ? "text-right" : "text-left"}`}>
-                      <span
-                        className={`inline-block px-3 lg:px-4 py-2 lg:py-2 rounded-xl text-sm lg:text-base ${
-                          msg.sender === "me"
-                            ? "bg-blue-500 text-white rounded-br-sm"
-                            : "bg-white text-gray-800 border border-gray-200 rounded-bl-sm"
-                        }`}
-                      >
-                        {msg.text}
-                      </span>
+                    <div key={index} className="mb-2 lg:mb-3 text-left">
+                      <div className="flex items-start gap-2 justify-start">
+                        <div className="flex flex-col">
+                          <span className={`text-xs font-semibold mb-1 ${
+                            msg.sender === "me" ? "text-blue-600" : "text-red-600"
+                          }`}>
+                            {msg.sender === "me" ? "You" : "Stranger"}
+                          </span>
+                          <span
+                            className={`inline-block px-3 lg:px-4 py-2 lg:py-2 rounded-xl text-sm lg:text-base ${
+                              msg.sender === "me"
+                                ? "bg-blue-500 text-white rounded-br-sm"
+                                : "bg-white text-gray-800 border border-gray-200 rounded-bl-sm"
+                            }`}
+                          >
+                            {msg.text}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   ))}
                   <div ref={messagesEndRef} />
@@ -707,7 +696,7 @@ const ChatPage = () => {
                   {/* Desktop controls on left */}
                   <button
                     onClick={nextPartner}
-                    className="hidden lg:block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl text-sm flex-shrink-0 transition-colors"
+                    className="hidden lg:block bg-white text-gray-700 border border-gray-400 font-semibold py-3 px-4 rounded-none text-sm flex-shrink-0 transition-colors"
                   >
                     Next
                   </button>
@@ -743,12 +732,17 @@ const ChatPage = () => {
                   {/* Desktop controls on right */}
                   <button
                     onClick={disconnect}
-                    className="hidden lg:block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-xl text-sm flex-shrink-0 transition-colors"
+                    className="hidden lg:block bg-white text-gray-700 border border-gray-400 font-semibold py-3 px-4 rounded-none text-sm flex-shrink-0 transition-colors"
                   >
                     Stop
                   </button>
                 </div>
               </div>
+
+                <div>
+                  {/* Chat UI */}
+                  <AdBanner/>
+                </div>
 
               {/* Report button - Desktop only */}
               {connected && hasRemoteVideo && (
