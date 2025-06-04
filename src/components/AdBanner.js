@@ -1,20 +1,33 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { useTheme } from "../contexts/ThemeContext"
 
 const AdBanner = ({ position }) => {
   const { darkMode } = useTheme()
+  const adRef = useRef(null)
+
+  useEffect(() => {
+    try {
+      if (window.adsbygoogle && adRef.current) {
+        window.adsbygoogle.push({})
+      }
+    } catch (e) {
+      console.error("AdSense error:", e)
+    }
+  }, [])
 
   return (
     <div
-      className={`w-full h-24 mb-4 flex items-center justify-center rounded ${
-        darkMode ? "bg-gray-800 text-gray-400" : "bg-gray-200 text-gray-600"
-      }`}
+     className="w-full h-24 mb-4 flex items-center justify-center rounded bg-white text-gray-600"
     >
-      <div className="text-center">
-        <p>Advertisement</p>
-        <p className="text-xs">Google Ad will appear here</p>
-      </div>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "inline-block", width: "390px", height: "60px" }}
+        data-ad-client="ca-pub-6382255537358474"
+        data-ad-slot="1425864328"
+        ref={adRef}
+      />
     </div>
   )
 }
