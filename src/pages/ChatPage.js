@@ -662,28 +662,20 @@ const ChatPage = () => {
                     </div>
                   )}
 
-                  {messages.map((msg, index) => (
-                    <div key={index} className="mb-2 lg:mb-3 text-left">
-                      <div className="flex items-start gap-2 justify-start">
-                        <div className="flex flex-col">
-                          <span className={`text-xs font-semibold mb-1 ${
-                            msg.sender === "me" ? "text-blue-600" : "text-red-600"
-                          }`}>
-                            {msg.sender === "me" ? "You" : "Stranger"}
-                          </span>
-                          <span
-                            className={`inline-block px-3 lg:px-4 py-2 lg:py-2 rounded-xl text-sm lg:text-base ${
-                              msg.sender === "me"
-                                ? "bg-blue-500 text-white rounded-br-sm"
-                                : "bg-white text-gray-800 border border-gray-200 rounded-bl-sm"
-                            }`}
-                          >
-                            {msg.text}
-                          </span>
-                        </div>
+                 {messages.map((msg, index) => (
+                  <div key={index} className="mb-2 lg:mb-3 text-left">
+                    <div className="flex items-start gap-2 justify-start">
+                      <div className="flex flex-col">
+                        <span className="text-sm lg:text-base text-gray-800">
+                          <span className={`font-semibold ${msg.sender === "me" ? "text-blue-600" : "text-red-600"}`}>
+                            {msg.sender === "me" ? "You" : "Stranger"}:
+                          </span>{" "}
+                          {msg.text}
+                        </span>
                       </div>
                     </div>
-                  ))}
+                  </div>
+                ))}
                   <div ref={messagesEndRef} />
                 </div>
               </div>
