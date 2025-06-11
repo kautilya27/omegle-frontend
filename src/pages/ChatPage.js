@@ -583,14 +583,13 @@ const ChatPage = () => {
                 <LoaderComponent />
               )}
 
-              {/* Omegle watermark */}
-              <div
-                className="absolute bottom-3 left-3 opacity-70 text-white text-xl font-bold z-10"
-                style={{ fontFamily: '"Baloo 2", cursive' }}
-              >
-                <span className="text-blue-400">O</span>
-                <span className="text-orange-400">megle</span>
-              </div>
+              {/* Your image watermark */}
+              <img
+                src={require("../assets/watermark.png")}
+                alt="Watermark"
+                className="absolute bottom-3 left-3 w-[110px] h-[40px] opacity-70 z-10 pointer-events-none"
+                style={{ objectFit: "contain" }}
+              />
 
               
             </div>
