@@ -585,7 +585,7 @@ const ChatPage = () => {
 
               {/* Your image watermark */}
               <img
-                src={require("../assets/watermark.png")}
+                src={require("../assets/omeglelogo.png")}
                 alt="Watermark"
                 className="absolute bottom-3 left-3 w-[110px] h-[40px] opacity-70 z-10 pointer-events-none"
                 style={{ objectFit: "contain" }}
