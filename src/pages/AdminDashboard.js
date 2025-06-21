@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react"
 import { useTheme } from "../contexts/ThemeContext"
 import axios from "axios"
-
+import { useNavigate } from "react-router-dom";
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const { darkMode } = useTheme()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [username, setUsername] = useState("")
@@ -129,6 +130,12 @@ const AdminDashboard = () => {
           <button onClick={logout} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
             Logout
           </button>
+          <button
+          onClick={() => navigate("/admin/blog")}
+          className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Go to Blog Admin
+        </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
