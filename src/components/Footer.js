@@ -17,6 +17,7 @@ function Footer() {
       <Link to="/terms-of-service" style={{ color: '#92634d', margin: '0 4px' }}>Terms of Service</Link>·
       <Link to="/privacy-policy" style={{ color: '#92634d', margin: '0 4px' }}>Privacy Policy</Link>·
       <Link to="/community-guidelines" style={{ color: '#92634d', margin: '0 4px' }}>Community Guidelines</Link>
+      <Link to="/blog" style={{ color: '#92634d', margin: '0 4px' }}>Blog</Link>
     </footer>
   );
 }
