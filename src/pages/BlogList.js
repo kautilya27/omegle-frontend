@@ -6,7 +6,7 @@ const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/blogs")
+    axios.get(`${process.env.REACT_APP_API_URL}/api/blogs`)
       .then(res => setBlogs(res.data))
       .catch(err => console.error(err));
   }, []);
