@@ -40,7 +40,7 @@ const BlogAdmin = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/blogs", formData);
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/blogs`, formData);
       alert("Blog posted successfully!");
       // Clear form (optional)
       setForm({
