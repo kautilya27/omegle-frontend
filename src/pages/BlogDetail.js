@@ -8,7 +8,7 @@ const BlogDetail = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/blogs/${slug}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/blogs/${slug}`)
       .then((res) => setBlog(res.data))
       .catch((err) => console.error(err));
   }, [slug]);
@@ -22,7 +22,7 @@ const BlogDetail = () => {
 
       {blog.imageUrl && (
         <img
-          src={`http://localhost:5000${blog.imageUrl}`}
+          src={`${process.env.REACT_APP_API_URL}${blog.imageUrl}`}
           alt={blog.title}
           className="w-full rounded-md mb-6 max-h-96 object-cover"
         />
