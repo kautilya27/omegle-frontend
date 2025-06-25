@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import { Helmet } from "react-helmet-async"
+
+
 const faqs = [
   {
     q: "What is Omegle Online?",
@@ -34,6 +37,20 @@ const faqs = [
 function FaqSection() {
   const [open, setOpen] = useState(-1);
 
+  // Generate FAQPage schema dynamically from faqs
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(faq => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a
+      }
+    }))
+  };
+
   return (
     <section style={{
       maxWidth: 700,
@@ -43,6 +60,12 @@ function FaqSection() {
       boxShadow: '0 2px 12px 0 rgba(0,0,0,0.06)',
       padding: '26px 18px'
     }}>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+      </Helmet>
+
       <h2 style={{
         fontSize: 23,
         fontWeight: 700,
@@ -52,6 +75,7 @@ function FaqSection() {
       }}>
         FAQs
       </h2>
+
       {faqs.map((item, idx) => (
         <div key={item.q} style={{ marginBottom: 10, borderBottom: '1px solid #eee' }}>
           <div
