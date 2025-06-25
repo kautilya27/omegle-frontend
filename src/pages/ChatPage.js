@@ -6,6 +6,7 @@ import io from "socket.io-client"
 import ReportModal from "../components/ReportModal"
 import { initializePeerConnection, createOffer, handleAnswer, handleIceCandidate } from "../utils/webrtc"
 import AdBanner from "../components/AdBanner"
+
 const ChatPage = () => {
   const location = useLocation()
   const navigate = useNavigate()
@@ -24,6 +25,7 @@ const ChatPage = () => {
   const [messages, setMessages] = useState([])
   const [currentMessage, setCurrentMessage] = useState("")
   const messagesEndRef = useRef(null)
+  const chatContainerRef = useRef(null)
 
   // WebRTC and socket refs - PERSISTENT REFS
   const socketRef = useRef(null)
@@ -213,10 +215,31 @@ const ChatPage = () => {
     }
   }, [])
 
-  // Scroll to bottom of chat when new messages arrive
+  // Fixed scroll behavior - only scroll when there are messages and chat is connected
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    // Only scroll to bottom if there are messages and we're connected
+    if (messages.length > 0 && messagesEndRef.current && chatContainerRef.current) {
+      // Use requestAnimationFrame to ensure DOM is updated
+      requestAnimationFrame(() => {
+        messagesEndRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+          inline: "nearest",
+        })
+      })
+    }
   }, [messages])
+
+  // Ensure page starts at top on initial load
+  useEffect(() => {
+    // Scroll to top of page on component mount
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" })
+
+    // Also ensure chat container starts at top
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = 0
+    }
+  }, [])
 
   const initializeMedia = async () => {
     try {
@@ -585,13 +608,11 @@ const ChatPage = () => {
 
               {/* Your image watermark */}
               <img
-                src={require("../assets/omeglelogo.png")}
+                src={require("../assets/omeglelogo.png") || "/placeholder.svg"}
                 alt="Watermark"
                 className="absolute bottom-3 left-3 w-[110px] h-[40px] opacity-70 z-10 pointer-events-none"
                 style={{ objectFit: "contain" }}
               />
-
-              
             </div>
 
             {/* Local video container - Overlay on mobile, separate on desktop - REMOVED SHADOW */}
@@ -607,8 +628,6 @@ const ChatPage = () => {
                 className="w-full h-full object-cover transform scale-x-[-1]"
                 onClick={handleVideoClick}
               />
-
-              
 
               {/* Loading indicator */}
               {!localVideoReady && (
@@ -650,8 +669,8 @@ const ChatPage = () => {
                 )}
               </div>
 
-              {/* Chat messages - ALWAYS VISIBLE */}
-              <div className="flex-1 p-2 lg:p-4 mb-1 lg:mb-2 overflow-y-auto bg-gray-50 block">
+              {/* Chat messages - ALWAYS VISIBLE - Added ref for scroll control */}
+              <div ref={chatContainerRef} className="flex-1 p-2 lg:p-4 mb-1 lg:mb-2 overflow-y-auto bg-gray-50 block">
                 <div className="min-h-full">
                   {messages.length === 0 && (
                     <div className="h-full flex items-center justify-center text-gray-500 text-sm lg:text-base">
@@ -661,28 +680,26 @@ const ChatPage = () => {
                     </div>
                   )}
 
-                 {messages.map((msg, index) => (
-                  <div key={index} className="mb-2 lg:mb-3 text-left">
-                    <div className="flex items-start gap-2 justify-start">
-                      <div className="flex flex-col">
-                        <span className="text-sm lg:text-base text-gray-800">
-                          <span className={`font-semibold ${msg.sender === "me" ? "text-blue-600" : "text-red-600"}`}>
-                            {msg.sender === "me" ? "You" : "Stranger"}:
-                          </span>{" "}
-                          {msg.text}
-                        </span>
+                  {messages.map((msg, index) => (
+                    <div key={index} className="mb-2 lg:mb-3 text-left">
+                      <div className="flex items-start gap-2 justify-start">
+                        <div className="flex flex-col">
+                          <span className="text-sm lg:text-base text-gray-800">
+                            <span className={`font-semibold ${msg.sender === "me" ? "text-blue-600" : "text-red-600"}`}>
+                              {msg.sender === "me" ? "You" : "Stranger"}:
+                            </span>{" "}
+                            {msg.text}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
                   <div ref={messagesEndRef} />
                 </div>
               </div>
 
-              {/* Spacer between messages and input */}
-
               {/* Chat input */}
-              <div className=" p-2 lg:p-3 bg-white border-t-2 border-gray-200 flex-shrink-0">
+              <div className="p-2 lg:p-3 bg-white border-t-2 border-gray-200 flex-shrink-0">
                 <div className="flex items-center gap-2">
                   {/* Desktop controls on left */}
                   <button
@@ -730,10 +747,10 @@ const ChatPage = () => {
                 </div>
               </div>
 
-                <div>
-                  {/* Chat UI */}
-                  <AdBanner/>
-                </div>
+              <div>
+                {/* Chat UI */}
+                <AdBanner />
+              </div>
 
               {/* Report button - Desktop only */}
               {connected && hasRemoteVideo && (
