@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Helmet } from "react-helmet-async"
 import TermsPopup from "./TermsPopup"
 
 const HomePage = () => {
@@ -28,18 +29,74 @@ const HomePage = () => {
     setPendingChatType(null)
   }
 
+  const schemaMarkup = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Omegle Online - Chat with Strangers Instantly",
+      "url": "https://www.omegleonline.com", // Replace with your real URL
+      "description":
+        "Omegle Online is a fast, safe, anonymous way to video or text chat with strangers around the world. Start chatting with one click!",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Omegle Online",
+        "url": "https://www.omegleonline.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.omegleonline.com/omeglelogo.png" // Optional logo
+        }
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Omegle Online",
+      "url": "https://www.omegleonline.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.omegleonline.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Omegle Online",
+      "url": "https://www.omegleonline.com",
+      "sameAs": [
+        "https://facebook.com/yourpage",
+        "https://twitter.com/yourhandle",
+        "https://instagram.com/yourprofile"
+      ],
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.omegleonline.com/omeglelogo.png"
+      }
+    }
+  ]
+
   return (
     <div className="min-h-screen bg-[#f9f9f7]">
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(schemaMarkup[0])}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(schemaMarkup[1])}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify(schemaMarkup[2])}
+        </script>
+      </Helmet>
+
       <header className="container mx-auto p-4 flex justify-between items-center">
         <div className="flex items-center">
           {/* Add logo or header content if needed */}
         </div>
       </header>
 
-      {/* Vertically centered main section */}
       <main className="flex items-center justify-center min-h-[calc(100vh-64px)] px-4">
         <div className="bg-white rounded-lg p-8 shadow-md w-full max-w-4xl">
-          
           <p className="text-sm font-medium text-gray-500 text-center mb-4 overflow-hidden text-ellipsis whitespace-nowrap">
             You don't need an app to use Omegle Online on your phone or tablet! The website works great on mobile.
           </p>
@@ -61,13 +118,8 @@ const HomePage = () => {
           </div>
 
           {/* Input and Buttons */}
-          
           <div className="text-center">
-
             <div className="flex justify-center items-center h-[20vh]">
-
-              
-              {/* Right: Centered Label and Buttons */}
               <div className="flex flex-col items-center w-full sm:w-1/2 pl-4">
                 <label className="text-base font-semibold mb-2 text-center">Start chatting:</label>
                 <div className="flex items-center gap-3">
@@ -86,8 +138,6 @@ const HomePage = () => {
                   </button>
                 </div>
               </div>
-
-            
             </div>
           </div>
         </div>
