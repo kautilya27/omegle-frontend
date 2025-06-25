@@ -30,7 +30,7 @@ function FeaturesSection() {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Omegle Online Features",
-    "url": "https://yourdomain.com", // Replace with your actual homepage URL
+    "url": "https://www.omegleonline.com", 
     "mainEntity": features.map((feature) => ({
       "@type": "Service",
       "name": feature.title,
