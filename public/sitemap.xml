@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.omegleonline.com/</loc>
+  </url>
+  <url>
+    <loc>https://www.omegleonline.com/chat</loc>
+  </url>
+  <url>
+    <loc>https://www.omegleonline.com/blog</loc>
+  </url>
+  <url>
+    <loc>https://www.omegleonline.com/privacy-policy</loc>
+  </url>
+  <url>
+    <loc>https://www.omegleonline.com/terms-of-service</loc>
+  </url>
+  <url>
+    <loc>https://www.omegleonline.com/community-guidelines</loc>
+  </url>
+  <!-- Blog detail pages should be dynamically added by backend or build process -->
+</urlset> 
